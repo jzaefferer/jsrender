@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+	<script src="../../jquery.render.js" type="text/javascript"></script>
+	<link href="../resources/demos.css" rel="stylesheet" type="text/css" />
+
+	<link href="../resources/movielist.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<a href="../index.html">Home</a><br />
+
+<h3>Using {{tmpl}} to render hierarchical data.</h3>
+
+<script id="layout-1" type="text/x-jquery-tmpl">
+	<body>
+		<h1>Title</h1>
+		<div>
+			{{html $child}}
+		</div>
+	</body>
+</script>
+<script id="layout-2" type="text/x-jquery-tmpl">
+	<body>
+		<dl>
+			<dt>Title</dt>
+			<dd>{{html $child}}</dd>
+		</dl>
+	</body>
+</script>
+
+<script id="content-1" type="text/x-jquery-tmpl">
+	{{wrap layout}}
+		Hello ${username}!
+	{{/wrap}}
+</script>
+<script id="content-2" type="text/x-jquery-tmpl">
+	{{wrap layout}}
+		Goodbye ${username}!
+	{{/wrap}}
+</script>
+
+<div id="body"></div>
+
+<script type="text/javascript">
+
+	var movies = [
+		{
+			Title: "Meet Joe Black",
+			Languages: [
+				{ Name: "English" },
+				{ Name: "French" }
+			]
+		},
+		{
+			Title: "Eyes Wide Shut",
+			Languages: [
+				{ Name: "French" },
+				{ Name: "German" },
+				{ Name: "Spanish" }
+			]
+		}
+	];
+
+	$( "#body" ).html(
+		$( "#content-1" ).render( {
+			layout: "#layout-1",
+			username: "Peter Pan"
+		})
+	);
+
+</script>
+
+</body>
+</html>
+
+
